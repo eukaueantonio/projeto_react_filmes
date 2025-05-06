@@ -1,0 +1,80 @@
+/* A mae de todos:  */
+.main_login{
+    display: flex;
+    height: 100vh;
+}
+
+/* Banner da esquerda:  */
+.banner{
+    background-image: url(../../assents/img/fundoLogin.png);
+    flex: 1;
+
+    /* Modificar algumas caracteristicas da imagem */
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Form de login da direita:  */
+.section_login{
+    flex: 1;
+    background-color: rgb(183, 0, 0);
+
+    /* Centraliza o campo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.section_login img{
+    width: 290px;
+}
+
+.form_login{
+    color: white;
+    width: 70%;
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.form_login h1{
+    
+    /* Deixa o titulo maisculo */
+    text-transform: uppercase;
+    
+}
+
+.campo_input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+}
+
+.campos_login{
+    width: 100%;
+}
+
+.campo_input input{
+    height: 30px;
+    padding: 1px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 1px 4px 4px 0px rgb(8, 8, 8);
+    margin-top: 7px;
+}
+/* RESPONSIVIDADE */
+/* Me de algumas caracteristicas a partir de um tamanho de tela */
+@media screen and (max-width: 768px){
+    .banner{
+        /* desaparece p banner */
+        display: none;
+    }
+}
