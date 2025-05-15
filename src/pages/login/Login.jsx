@@ -21,7 +21,7 @@ const Login = () => {
                             <input type="password" name="senha" placeholder="Digite sua Senha" />
                         </div>
                     </div>
-                    <Botao nomeDoBotao ="Entrar"/>
+                    <Botao nomeDoBotao="Entrar" />
                 </form>
             </section>
         </main>

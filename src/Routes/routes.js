@@ -10,7 +10,7 @@ const Rotas = () => {
         <BrowserRouter>
             <Routes>
                 {/* http://localhost:3000/   => Login */}
-                <Route path="/" element={<Login />} exact/>
+                <Route path="/" element={<Login />} exact />
                 {/* http://localhost:3000/Filme  => Cadastro de filmes */}
                 <Route path="/Filme" element={<CadastroFilme />} />
                 {/* http://localhost:3000/Genero  => Cadastro de Genero */}

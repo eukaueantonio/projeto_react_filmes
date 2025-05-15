@@ -10,8 +10,8 @@ const CadastroFilme = () => {
         <Fragment>
             <Header />
             <main>
-                <Cadastro tituloCadastro="Cadastro de Filme"  placeholder ="Filme"/>
-                <Lista nomeTitulo ="Lista dos Filmes"/>
+                <Cadastro tituloCadastro="Cadastro de Filme" placeholder="Filme" />
+                <Lista nomeTitulo="Lista dos Filmes" />
             </main>
             <Footer />
         </Fragment>

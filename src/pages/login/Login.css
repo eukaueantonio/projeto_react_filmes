@@ -1,11 +1,11 @@
 /* A mae de todos:  */
-.main_login{
+.main_login {
     display: flex;
     height: 100vh;
 }
 
 /* Banner da esquerda:  */
-.banner{
+.banner {
     background-image: url(../../assents/img/fundoLogin.png);
     flex: 1;
 
@@ -16,7 +16,7 @@
 }
 
 /* Form de login da direita:  */
-.section_login{
+.section_login {
     flex: 1;
     background-color: rgb(183, 0, 0);
 
@@ -28,11 +28,11 @@
 
 }
 
-.section_login img{
+.section_login img {
     width: 290px;
 }
 
-.form_login{
+.form_login {
     color: white;
     width: 70%;
     height: 50%;
@@ -40,28 +40,28 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
-.form_login h1{
-    
+.form_login h1 {
+
     /* Deixa o titulo maisculo */
     text-transform: uppercase;
-    
+
 }
 
-.campo_input{
+.campo_input {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 
 }
 
-.campos_login{
+.campos_login {
     width: 100%;
 }
 
-.campo_input input{
+.campo_input input {
     height: 30px;
     padding: 1px 10px;
     border: none;
@@ -70,10 +70,11 @@
     box-shadow: 1px 4px 4px 0px rgb(8, 8, 8);
     margin-top: 7px;
 }
+
 /* RESPONSIVIDADE */
 /* Me de algumas caracteristicas a partir de um tamanho de tela */
-@media screen and (max-width: 768px){
-    .banner{
+@media screen and (max-width: 768px) {
+    .banner {
         /* desaparece p banner */
         display: none;
     }
