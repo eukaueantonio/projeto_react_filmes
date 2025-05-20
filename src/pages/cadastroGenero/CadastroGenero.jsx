@@ -69,6 +69,7 @@ const CadastroGenero = () => {
 
     //uma funcao nao assincrona acontece simultaneamente tudo, ou seja o comando sera gerado tudo de uma vez, porem se voce usar uma funcao assincrona com a ajuda do await ele vai esperar algo acontecer para enfim concluir a acao da funcao, por exemplo o codigo de baixo, que ele usa o async, pois indica que eh uma funcao assincrona e o uso do await para estabelecer uma conexao com a api e depois poder prosseguir a acao do codigo
 
+    
     //assincrona
     async function listarGenero() {
         //trc e de enter 
@@ -92,7 +93,7 @@ const CadastroGenero = () => {
                 confirmButton: "btn btn-success",
                 cancelButton: "btn btn-danger"
             },
-            buttonsStyling: false
+            buttonsStyling: true
         });
         swalWithBootstrapButtons.fire({
             title: "Você tem certeza?",
@@ -141,6 +142,31 @@ const CadastroGenero = () => {
         // listarGenero();
     }
 
+    async function editarGenero(genero) {
+        //vai ser criado um novo genero a partir da acao de baixo
+        const { value: novoGenero } = await Swal.fire({
+            title: "Modifique seu gênero",
+            input: "text",
+            inputLabel: "Novo gênero",
+            inputValue: genero.nome,
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return "O campo não pode estar vazio!";
+                }
+            }
+        });
+        if (novoGenero) {
+            try {
+                await api.put(`genero/${genero.idGenero}`,
+                    { nome: novoGenero });
+                Swal.fire(`Gênero modificado: ${novoGenero}`);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
 
     // //teste 
     // //precisamos do array de dependencia pois sem ele, toda a vez que a pagina roda ele esquece de todas as coisas sao inseridas nele 
@@ -169,6 +195,7 @@ const CadastroGenero = () => {
 
 
 
+
     //fim do teste
 
     return (
@@ -189,7 +216,9 @@ const CadastroGenero = () => {
                     nomeTitulo="Lista dos Generos"
                     visibilidade="none"
                     lista={listaGenero}
-                    funcExcluir={excluirGenero} />
+                    funcExcluir={excluirGenero}
+                    funcEditar={editarGenero} />
+
             </main>
             <Footer />
         </>
