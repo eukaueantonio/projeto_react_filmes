@@ -26,7 +26,7 @@ const CadastroGenero = () => {
 
     //o genero esta sendo usado para inserirmos um valor e vamos usar o setGenero para atualizar e entao de fato permanecer 
 
-    function alerta(icone, mensagem) {
+    function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -52,13 +52,15 @@ const CadastroGenero = () => {
                 //cadastrar um genero: post 
                 //usamos chaves pois estamos trabalhando com propriedades, valor, objeto
                 await api.post("genero", { nome: genero });
-                alerta("success", "Cadastro realizado com sucesso!")
+                alertar("success", "Cadastro realizado com sucesso!")
                 setGenero("");
+                //atualizar minha lista assim que cadastrar um novo genero
+                listarGenero();
             } catch (error) {
-                alerta("error", "Erro! - Entre em contato com o suporte!")
+                alertar("error", "Erro! - Entre em contato com o suporte!")
             }
         } else {
-            alerta("error", "Erro! Preencha o campo!")
+            alertar("error", "Erro! Preencha o campo!")
         }
 
         //try => tentar(o esperado que aconteca)
@@ -85,13 +87,58 @@ const CadastroGenero = () => {
 
     //funcao de excluir o genero
     async function excluirGenero(generoId) {
-        try {
-            await api.delete(`genero/${generoId.idGenero}`)
-            alerta("success", "Exclusão realizada com sucesso!")
-        } catch (error) {
-            console.log(error);
-        }
-        listarGenero();
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Você tem certeza?",
+            text: "Não será possível reverter!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não",
+            reverseButtons: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    //interpolacao eh utilizar crase e sifrao 
+                    //concatenacao eh um ligamento entre duas strings
+                    await api.delete(`genero/${generoId.idGenero}`)
+
+                    // alertar("success", "Exclusão realizada com sucesso!")
+                } catch (error) {
+                    console.log(error);
+                }
+                swalWithBootstrapButtons.fire({
+                    title: "Deletado!",
+                    text: "Seu gênero foi deletado com sucesso.",
+                    icon: "success"
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado!",
+                    text: "Seu gênero não foi deletado :)",
+                    icon: "error"
+                });
+            }
+        });
+        // try {
+        //     //interpolacao eh utilizar crase e sifrao 
+        //     //concatenacao eh um ligamento entre duas strings
+        //     await api.delete(`genero/${generoId.idGenero}`)
+
+        //     // alertar("success", "Exclusão realizada com sucesso!")
+        // } catch (error) {
+        //     console.log(error);
+        // }
+        // listarGenero();
     }
 
 
@@ -102,9 +149,23 @@ const CadastroGenero = () => {
     // },[genero]);
 
     //assim que a pagina renderizar o metodo listarGenero() sera chamado
+    //arrow function, funcao anonima 
     useEffect(() => {
         listarGenero();
-    }, [genero])
+    }, [listaGenero])
+
+    //da samantaaaaa
+    // useEffect(() => {
+    //     alertar("success", "Lista modificada")
+    // }, [listaGenero])
+
+    //hooks        funcao        dependencia 
+    //useEffect(      ()=>{}   ,       []          )
+
+    //hooks: Effect(efeito a partir de uma alteracao)
+    //     :efeito colateral
+    //funcao:
+    //dependencia: Vazio(o efeito acontece na primeira vez que a tela eh "montada" ou quando for recarregada, com dependencia(toda vez que o state sofrer alteracao o efeito acontecera))
 
 
 
@@ -124,11 +185,11 @@ const CadastroGenero = () => {
                     setValorInput={setGenero}
                 />
 
-                <Lista 
-                nomeTitulo="Lista dos Generos" 
-                visibilidade="none" 
-                lista = {listaGenero} 
-                funcExcluir = {excluirGenero}/>
+                <Lista
+                    nomeTitulo="Lista dos Generos"
+                    visibilidade="none"
+                    lista={listaGenero}
+                    funcExcluir={excluirGenero} />
             </main>
             <Footer />
         </>
